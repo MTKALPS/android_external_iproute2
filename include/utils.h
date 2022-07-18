@@ -112,14 +112,14 @@ int dnet_pton(int af, const char *src, void *addr);
 const char *ipx_ntop(int af, const void *addr, char *str, size_t len);
 int ipx_pton(int af, const char *src, void *addr);
 
-extern int __iproute2_hz_internal;
+static int tc__iproute2_hz_internal;
 extern int __get_hz(void);
 
 static __inline__ int get_hz(void)
 {
-	if (__iproute2_hz_internal == 0)
-		__iproute2_hz_internal = __get_hz();
-	return __iproute2_hz_internal;
+	if (tc__iproute2_hz_internal == 0)
+		tc__iproute2_hz_internal = __get_hz();
+	return tc__iproute2_hz_internal;
 }
 
 extern int __iproute2_user_hz_internal;

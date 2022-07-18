@@ -146,7 +146,16 @@ static int batch(const char *name)
 #endif
 
 int main(int argc, char **argv)
-{
+{ 
+	
+	/* ignore SIGPIPE */
+  struct sigaction sigact;
+  sigact.sa_flags = 0;
+  sigemptyset(&sigact.sa_mask);
+  sigact.sa_handler = SIG_IGN;
+  sigaction(SIGPIPE, &sigact, NULL);
+  
+  
 	char *basename;
 
 	basename = strrchr(argv[0], '/');

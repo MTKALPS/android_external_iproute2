@@ -296,6 +296,10 @@ int print_route(const struct sockaddr_nl *who, struct nlmsghdr *n, void *arg)
 	}
 	if (filter.flushb && n->nlmsg_type != RTM_NEWROUTE)
 		return 0;
+	
+	// mtk07384: remove unreachable routing message
+	if(r->rtm_type == RTN_UNREACHABLE)
+		 return 0;
 	len -= NLMSG_LENGTH(sizeof(*r));
 	if (len < 0) {
 		fprintf(stderr, "BUG: wrong nlmsg len %d\n", len);

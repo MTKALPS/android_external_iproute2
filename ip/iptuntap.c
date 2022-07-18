@@ -30,7 +30,11 @@
 #include "utils.h"
 #include "ip_common.h"
 
+#ifdef ANDROID
+#define TUNDEV "/dev/tun"
+#else
 #define TUNDEV "/dev/net/tun"
+#endif
 
 static void usage(void) __attribute__((noreturn));
 
